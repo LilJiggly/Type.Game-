@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Typing Game</title>
+    <script>
+      // Set the theme before first paint to avoid a flash
+      (function () {
+        var theme = null;
+        try {
+          theme = localStorage.getItem("typingGameTheme");
+        } catch (e) {}
+        if (!theme) {
+          theme = window.matchMedia("(prefers-color-scheme: light)").matches
+            ? "light"
+            : "dark";
+        }
+        document.documentElement.setAttribute("data-theme", theme);
+      })();
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600&family=Space+Mono:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <header class="topBar">
+      <h1 class="title">TYPE<span>.</span>GAME</h1>
+      <div class="topActions">
+        <button id="themeButton" class="ghostButton" title="Switch light/dark mode"></button>
+        <button id="fontButton" class="ghostButton" title="Change font"></button>
+      </div>
+    </header>
+
+    <div class="gameContainer">
+      <div id="wordContainer"></div>
+
+      <input
+        id="input"
+        autocomplete="off"
+        spellcheck="false"
+        tabindex="-1"
+        aria-label="Type the highlighted word"
+      />
+
+      <h2 id="hint">Start typing to begin</h2>
+
+      <div class="stats">
+        <p id="progress"></p>
+        <p id="timer"></p>
+        <p id="score"></p>
+        <p id="best"></p>
+      </div>
+
+      <div id="scoreContainer" class="hidden">
+        <div id="baseScore" class="scoreRow" tabindex="0"></div>
+        <div id="cleanBonus" class="scoreRow" tabindex="0"></div>
+        <div id="timeBonus" class="scoreRow" tabindex="0"></div>
+        <div id="wpmBonus" class="scoreRow" tabindex="0"></div>
+        <div id="finalScore" class="scoreRow" tabindex="0"></div>
+        <div id="accuracy" class="scoreRow" tabindex="0"></div>
+        <div id="wpm" class="scoreRow" tabindex="0"></div>
+      </div>
+
+      <div class="options">
+        <span>Words:</span>
+        <div id="countOptions" class="optionButtons" role="group" aria-label="Number of words"></div>
+      </div>
+
+      <div class="buttons">
+        <button id="restartButton">Restart (Esc)</button>
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>

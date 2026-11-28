@@ -371,7 +371,8 @@ inputElement.addEventListener("input", () => {
   const wordElement = container.children[0];
   if (!wordElement || wordElement.classList.contains("slideOut")) return;
 
-  const typed = inputElement.value;
+  // Words are shown in capitals, so matching ignores case (phone keyboards and Caps Lock)
+  const typed = inputElement.value.toLowerCase();
 
   // Count a keystroke only when a letter was added (not on backspace)
   if (typed.length > previousLength) {
@@ -430,6 +431,10 @@ document.addEventListener("keydown", (event) => {
 });
 
 document.addEventListener("DOMContentLoaded", () => {
+  // Touch devices have no keyboard until the input is focused by a tap
+  if (window.matchMedia("(pointer: coarse)").matches) {
+    hintElement.textContent = "Tap here and start typing";
+  }
   updateThemeButton();
   fontButton.textContent = `Aa ${FONTS[fontIndex]}`;
   buildCountOptions();

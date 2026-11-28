@@ -97,6 +97,7 @@ body {
 
 /* Hidden input that captures keystrokes */
 #input {
+  font-size: 16px; /* 16px+ stops iOS Safari zooming the page on focus */
   position: absolute;
   opacity: 0;
   pointer-events: none;
